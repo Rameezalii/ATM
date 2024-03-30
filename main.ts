@@ -14,13 +14,14 @@ let pinAnswer = await inquirer.prompt([
 
 if (pinAnswer.pin === myPin) {
   console.log("Correct pin code!!!");
+ 
 
   let operationAns = await inquirer.prompt([
     {
       name: "operation",
       type: "list",
       message: "Select One Option",
-      choices: ["Withdraw", "Check Balance", "Fast Cash"],
+      choices: ["Withdraw", "Check Balance", "Fast Cash","Exit"],
     },
   ]);
 
@@ -50,14 +51,22 @@ if (pinAnswer.pin === myPin) {
         choices: [500, 1000, 2000, 5000, 10000],
       },
     ]);
-    if ((myBalance -= cash.options)) {
+    myBalance -= cash.options 
       console.log(`your remaining balance is ${myBalance}`);
       console.log(`Thank you for using ATM`);
-    }
+    
   }
   if (operationAns.operation === "Check Balance") {
     console.log(`Your account balance is ${myBalance}`);
   }
-} else {
+  else if(operationAns.operation === "Exit"){
+    console.log(`Thanks for Banking ATM`)
+  }
+}
+
+else if(!pinAnswer.pin){
+  console.log("Invalid Credential");
+}
+ else {
   console.log("Incorrect pin code");
 }

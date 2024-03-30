@@ -1,3 +1,4 @@
+#! usr/bin/env node
 import inquirer from "inquirer";
 let myBalance = 12000;
 let myPin = 7575;
@@ -15,7 +16,7 @@ if (pinAnswer.pin === myPin) {
             name: "operation",
             type: "list",
             message: "Select One Option",
-            choices: ["Withdraw", "Check Balance", "Fast Cash"],
+            choices: ["Withdraw", "Check Balance", "Fast Cash", "Exit"],
         },
     ]);
     // withdraw code
@@ -27,9 +28,6 @@ if (pinAnswer.pin === myPin) {
                 message: "Enter you amount",
             },
         ]);
-        if (isNaN(amountAns.amount)) {
-            console.log("No amount entered");
-        }
         if (amountAns.amount > myBalance) {
             console.log("Infsufficient Balance");
         }
@@ -47,14 +45,19 @@ if (pinAnswer.pin === myPin) {
                 choices: [500, 1000, 2000, 5000, 10000],
             },
         ]);
-        if ((myBalance -= cash.options)) {
-            console.log(`your remaining balance is ${myBalance}`);
-            console.log(`Thank you for using ATM`);
-        }
+        myBalance -= cash.options;
+        console.log(`your remaining balance is ${myBalance}`);
+        console.log(`Thank you for using ATM`);
     }
     if (operationAns.operation === "Check Balance") {
         console.log(`Your account balance is ${myBalance}`);
     }
+    else if (operationAns.operation === "Exit") {
+        console.log(`OK by duaon me yad rakhna Allah Hafiz`);
+    }
+}
+else if (!pinAnswer.pin) {
+    console.log("Invalid Credential");
 }
 else {
     console.log("Incorrect pin code");
